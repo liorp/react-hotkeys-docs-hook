@@ -1,9 +1,11 @@
 # react-hotkeys-docs-hook
 
+[![react-docs-hotkeys-hook example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-docs-hotkeys-hook-example-87ifc?fontsize=14&hidenavigation=1&theme=dark)
+
 This is a thin wrapper for [react-hotkeys-hook](https://react-hotkeys-hook.vercel.app/) package to allow dynamically documenting the hotkeys.
 This means that the every hotkey that a component registers is added to a global context, and removed from the context upon the component unmount, to ensure fresh list of hotkeys.
 
-## Documentation & Live Examples
+## Documentation
 
 - [Quick Start](https://react-hotkeys-docs-hook.vercel.app/docs/intro)
 - [Documentation](https://react-hotkeys-docs-hook.vercel.app/docs/)
