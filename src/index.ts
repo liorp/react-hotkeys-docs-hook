@@ -2,8 +2,8 @@ import {
   HotkeysDocsContextType,
   HotkeysDocsContext,
   useHotkeysDocsContext,
-} from './HotkeysDocsContext';
-import { useHotkeysDocs } from './useHotkeysDocs';
+  useHotkeysDocs,
+} from './useHotkeysDocs';
 import { HotkeysDocs } from 'types';
 
 export {

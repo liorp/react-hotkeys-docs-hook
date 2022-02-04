@@ -1,8 +1,18 @@
 import * as React from 'react';
 import { useHotkeys, Options } from 'react-hotkeys-hook';
 import { KeyHandler } from 'hotkeys-js';
-import { useHotkeysDocsContext } from 'HotkeysDocsContext';
 import { Hotkey, HotkeysDocs } from 'types';
+import { createContext, useContext } from 'react';
+
+export type HotkeysDocsContextType<T extends number | string | symbol> = {
+  hotkeysDocs: HotkeysDocs<T>;
+  setHotkeysDocs: React.Dispatch<React.SetStateAction<HotkeysDocs<T>>>;
+};
+
+export const HotkeysDocsContext = (<T extends number | string | symbol>() =>
+  createContext<HotkeysDocsContextType<T>>({} as any))();
+
+export const useHotkeysDocsContext = () => useContext(HotkeysDocsContext);
 
 /** A hotkey is identified by its section and keys */
 const addHotkeyToDocs = <T extends number | string | symbol>(
@@ -32,14 +42,36 @@ const removeHotkeyFromDocs = <T extends number | string | symbol>(
   };
 };
 
-export const useHotkeysDocs = (
+export function useHotkeysDocs<T extends Element>(
+  section: string,
+  description: string,
+  keys: string,
+  callback: KeyHandler,
+  options?: Options
+): React.MutableRefObject<T | null>;
+export function useHotkeysDocs<T extends Element>(
+  section: string,
+  description: string,
+  keys: string,
+  callback: KeyHandler,
+  deps?: any[]
+): React.MutableRefObject<T | null>;
+export function useHotkeysDocs<T extends Element>(
   section: string,
   description: string,
   keys: string,
   callback: KeyHandler,
   options?: Options,
   deps?: any[]
-) => {
+): React.MutableRefObject<T | null>;
+export function useHotkeysDocs<T extends Element>(
+  section: string,
+  description: string,
+  keys: string,
+  callback: KeyHandler,
+  options?: any[] | Options,
+  deps?: any[]
+): React.MutableRefObject<T | null> {
   const { setHotkeysDocs } = useHotkeysDocsContext();
   const hotkey: Hotkey = { description, keys };
   React.useEffect(() => {
@@ -48,5 +80,10 @@ export const useHotkeysDocs = (
       setHotkeysDocs(d => removeHotkeyFromDocs(d, hotkey, section));
     };
   }, []);
+  // Typescript can't understand that options can be deps
+  if (options instanceof Array) {
+    deps = options;
+    options = undefined;
+  }
   return useHotkeys(keys, callback, options, deps);
-};
+}
