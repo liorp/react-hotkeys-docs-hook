@@ -1,4 +1,3 @@
-import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { HotkeysDocsContext, useHotkeysDocs, HotkeysDocs } from '../.';
@@ -7,14 +6,14 @@ const InnerSection = () => {
   useHotkeysDocs('Section A', 'Cool hotkey', 'alt+c', () =>
     console.log('Cool hotkey called!')
   );
-  return <div>Bla</div>;
+  return <div>Lorem</div>;
 };
 
 const AnotherInnerSection = () => {
   useHotkeysDocs('Section B', 'Another cool hotkey', 'alt+c', () =>
     console.log('Another cool hotkey called!')
   );
-  return <div>Bla</div>;
+  return <div>Ipsum</div>;
 };
 
 const App = () => {
