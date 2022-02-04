@@ -89,13 +89,14 @@ const config = {
                 href: 'https://react-hotkeys-hook.vercel.app/',
               },
               {
+                label: 'Live Example',
+                href:
+                  'https://codesandbox.io/s/react-docs-hotkeys-hook-example-87ifc?fontsize=14&hidenavigation=1&theme=dark',
+              },
+              {
                 label: 'Support',
                 href:
                   'https://github.com/liorpollak/react-hotkeys-docs-hook/discussions',
-              },
-              {
-                label: 'FAQ',
-                href: 'https://github.com/liorpollak/react-hotkeys-docs-hook',
               },
               {
                 label: 'GitHub',
