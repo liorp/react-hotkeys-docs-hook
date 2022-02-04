@@ -25,14 +25,72 @@ Make sure that you have at least version 16.8 of `react` and `react-dom` install
 
 ## Usage
 
-```js
-export const ExampleComponent = () => {
-  const [count, setCount] = useState(0);
-  useHotkeysDocs('A', 'Cool hotkey', 'b', 'ctrl+k', () =>
-    setCount(prevCount => prevCount + 1)
-  );
+```ts
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {
+  useHotkeysDocs,
+  useHotkeysDocsContext,
+  HotkeysDocsContext,
+  Hotkey,
+} from 'react-hotkeys-docs-hook';
 
-  return <p>Pressed {count} times.</p>;
+const InnerSection = () => {
+  useHotkeysDocs('A', 'Cool hotkey', 'b', () =>
+    console.log('Cool hotkey called!')
+  );
+  return (
+    <div>
+      <h1>Section A</h1>Lorem
+    </div>
+  );
+};
+
+const AnotherInnerSection = () => {
+  useHotkeysDocs('B', 'Another cool hotkey', 'a', () =>
+    console.log('Another cool hotkey called!')
+  );
+  return (
+    <div>
+      <h1>Section B</h1>Ipsum
+    </div>
+  );
+};
+
+export const HotkeysDocs = () => {
+  const { hotkeysDocs } = useHotkeysDocsContext();
+  const sections = hotkeysDocs.map(v => v.section);
+  return (
+    <div>
+      {sections.map(s => (
+        <div key={s}>
+          <h2>{s}</h2>
+          {hotkeysDocs
+            .filter(v => v.section === s)
+            .map(k => (
+              <span key={k.keys}>
+                <pre>{k.keys}</pre>
+                {k.description}
+              </span>
+            ))}
+        </div>
+      ))}
+      {!hotkeysDocs && 'No hotkeys available'}
+    </div>
+  );
+};
+
+const App = () => {
+  const [hotkeysDocs, setHotkeysDocs] = React.useState<Hotkey>([]);
+
+  return (
+    <HotkeysDocsContext.Provider value={{ hotkeysDocs, setHotkeysDocs }}>
+      <HotkeysDocs />
+      <br />
+      <InnerSection />
+      <AnotherInnerSection />
+    </HotkeysDocsContext.Provider>
+  );
 };
 ```
 

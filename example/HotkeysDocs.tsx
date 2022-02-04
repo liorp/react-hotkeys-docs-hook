@@ -12,7 +12,7 @@ export const HotkeysDocs = () => {
           {hotkeysDocs
             .filter(v => v.section === s)
             .map(k => (
-              <span key={k}>
+              <span key={k.keys}>
                 <pre>{k.keys}</pre>
                 {k.description}
               </span>
