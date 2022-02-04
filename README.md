@@ -1,5 +1,7 @@
 # react-hotkeys-docs-hook
 
+![GitHub](https://img.shields.io/github/license/liorp/react-hotkeys-docs-hook)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-hotkeys-docs-hook)
 [![react-docs-hotkeys-hook example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-docs-hotkeys-hook-example-87ifc?fontsize=14&hidenavigation=1&theme=dark)
 
 This is a thin wrapper for [react-hotkeys-hook](https://react-hotkeys-hook.vercel.app/) package to allow dynamically documenting the hotkeys.
