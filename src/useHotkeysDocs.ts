@@ -21,14 +21,17 @@ const addHotkeyToDocs = <T extends number | string | symbol>(
   section: T
 ) => {
   const s = docs[section];
+  const k = { ...hotkey };
   if (s && s.filter(v => v.keys === hotkey.keys).length) {
-    const k = { ...hotkey };
     return {
       ...docs,
       [section]: [...s!, k],
     };
   }
-  return docs;
+  return {
+    ...docs,
+    [section]: [k],
+  };
 };
 
 const removeHotkeyFromDocs = <T extends number | string | symbol>(
