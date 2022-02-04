@@ -31,7 +31,7 @@ const App = () => {
     <HotkeysDocsContext.Provider value={{ hotkeysDocs, setHotkeysDocs }}>
       <div>
         {Object.keys(hotkeysDocs).map(section => (
-          <div>
+          <div key={section}>
             <h2>{section}</h2>
             {hotkeysDocs[section].map(k => (
               <span>
