@@ -3,17 +3,25 @@ import * as ReactDOM from 'react-dom';
 import { HotkeysDocsContext, useHotkeysDocs, HotkeysDocs } from '../.';
 
 const InnerSection = () => {
-  useHotkeysDocs('Section A', 'Cool hotkey', 'b', () =>
+  useHotkeysDocs('A', 'Cool hotkey', 'b', () =>
     console.log('Cool hotkey called!')
   );
-  return <div>Lorem</div>;
+  return (
+    <div>
+      <h1>Section A</h1>Lorem
+    </div>
+  );
 };
 
 const AnotherInnerSection = () => {
-  useHotkeysDocs('Section B', 'Another cool hotkey', 'a', () =>
+  useHotkeysDocs('B', 'Another cool hotkey', 'a', () =>
     console.log('Another cool hotkey called!')
   );
-  return <div>Ipsum</div>;
+  return (
+    <div>
+      <h1>Section B</h1>Ipsum
+    </div>
+  );
 };
 
 const App = () => {
@@ -27,12 +35,14 @@ const App = () => {
             <h2>{section}</h2>
             {hotkeysDocs[section].map(k => (
               <span>
-                {k.keys} {k.description}
+                <pre>{k.keys}</pre>
+                {k.description}
               </span>
             ))}
           </div>
         ))}
       </div>
+      <br />
       <InnerSection />
       <AnotherInnerSection />
     </HotkeysDocsContext.Provider>
