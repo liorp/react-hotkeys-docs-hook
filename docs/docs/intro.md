@@ -34,7 +34,7 @@ values={[
 import { useHotkeysDocs, HotkeysDocs } from 'react-hotkeys-docs-hook';
 ```
 
-```jsx live
+```jsx
 const InnerSection = () => {
   useHotkeysDocs('A', 'Cool hotkey', 'b', () =>
     console.log('Cool hotkey called!')
