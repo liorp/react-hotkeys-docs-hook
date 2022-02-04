@@ -21,8 +21,6 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1.6.0
-        with:
-          useLockFile: false
 
       - name: Lint
         run: npm run lint

@@ -1,48 +1,29 @@
 import * as React from 'react';
 import { useHotkeys, Options } from 'react-hotkeys-hook';
 import { KeyHandler } from 'hotkeys-js';
-import { Hotkey, HotkeysDocs } from 'types';
-import { createContext, useContext } from 'react';
+import { Hotkey } from './types';
+import { useHotkeysDocsContext } from './HotkeysDocsContext';
 
-export type HotkeysDocsContextType<T extends number | string | symbol> = {
-  hotkeysDocs: HotkeysDocs<T>;
-  setHotkeysDocs: React.Dispatch<React.SetStateAction<HotkeysDocs<T>>>;
-};
+/** Note: a hotkey is identified by its section and keys */
 
-export const HotkeysDocsContext = (<T extends number | string | symbol>() =>
-  createContext<HotkeysDocsContextType<T>>({} as any))();
-
-export const useHotkeysDocsContext = () => useContext(HotkeysDocsContext);
-
-/** A hotkey is identified by its section and keys */
-const addHotkeyToDocs = <T extends number | string | symbol>(
-  docs: HotkeysDocs<T>,
-  hotkey: Hotkey,
-  section: T
-) => {
-  const s = docs[section];
-  const k = { ...hotkey };
-  if (s && s.filter(v => v.keys === hotkey.keys).length) {
-    return {
-      ...docs,
-      [section]: [...s!, k],
-    };
+export const _addHotkeyToDocs = (docs: Hotkey[], hotkey: Hotkey) => {
+  const foundHotkey =
+    docs.filter(v => v.keys === hotkey.keys && v.section === hotkey.section)
+      .length > 0;
+  if (foundHotkey) {
+    return [...docs];
   }
-  return {
-    ...docs,
-    [section]: [k],
-  };
+  return [...docs, hotkey];
 };
 
-const removeHotkeyFromDocs = <T extends number | string | symbol>(
-  docs: HotkeysDocs<T>,
-  hotkey: Hotkey,
-  section: T
-) => {
-  return {
-    ...docs,
-    [section]: docs[section]?.filter(v => v.keys !== hotkey.keys),
-  };
+export const _removeHotkeyFromDocs = (docs: Hotkey[], hotkey: Hotkey) =>
+  docs.filter(v => !(v.keys === hotkey.keys && v.section === hotkey.section));
+
+export const getHotkeysBySections = (hotkeys: Hotkey[]) => {
+  const sections = hotkeys.map(v => v.section);
+  const bySections: { [k: string]: Hotkey[] } = {};
+  sections.map(s => (bySections[s] = hotkeys.filter(v => v.section === s)));
+  return bySections;
 };
 
 export function useHotkeysDocs<T extends Element>(
@@ -76,11 +57,11 @@ export function useHotkeysDocs<T extends Element>(
   deps?: any[]
 ): React.MutableRefObject<T | null> {
   const { setHotkeysDocs } = useHotkeysDocsContext();
-  const hotkey: Hotkey = { description, keys };
+  const hotkey: Hotkey = { description, keys, section };
   React.useEffect(() => {
-    setHotkeysDocs(d => addHotkeyToDocs(d, hotkey, section));
+    setHotkeysDocs(d => _addHotkeyToDocs(d, hotkey));
     return () => {
-      setHotkeysDocs(d => removeHotkeyFromDocs(d, hotkey, section));
+      setHotkeysDocs(d => _removeHotkeyFromDocs(d, hotkey));
     };
   }, []);
   // Typescript can't understand that options can be deps
