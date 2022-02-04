@@ -24,4 +24,5 @@ export type HotkeysDocsContextType = {
 ## Usage
 
 ```ts
+const { setHotkeysDocs, hotkeysDocs } = useHotkeysDocsContext();
 ```

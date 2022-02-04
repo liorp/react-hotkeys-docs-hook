@@ -26,6 +26,7 @@ export const getHotkeysBySections = (hotkeys: Hotkey[]) => {
   return bySections;
 };
 
+/** This is where the magic happens - registers the hotkey to the HotkeysDocsContext on mount, and unregisters on unmount. */
 export function useHotkeysDocs<T extends Element>(
   section: string,
   description: string,
