@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { HotkeysDocs } from './HotkeysDocs';
-import { useHotkeysDocs, HotkeysDocsContext } from '../.';
+import { useHotkeysDocs, HotkeysDocsContext, Hotkey } from '../.';
 
 const InnerSection = () => {
   useHotkeysDocs('A', 'Cool hotkey', 'b', () =>
@@ -26,7 +26,7 @@ const AnotherInnerSection = () => {
 };
 
 const App = () => {
-  const [hotkeysDocs, setHotkeysDocs] = React.useState([]);
+  const [hotkeysDocs, setHotkeysDocs] = React.useState<Hotkey>([]);
 
   return (
     <HotkeysDocsContext.Provider value={{ hotkeysDocs, setHotkeysDocs }}>

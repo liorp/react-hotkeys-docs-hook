@@ -2,7 +2,7 @@ import { Hotkey } from './types';
 import { createContext, useContext } from 'react';
 
 export type HotkeysDocsContextType = {
-  hotkeysDocs: Hotkey;
+  hotkeysDocs: Hotkey[];
   setHotkeysDocs: React.Dispatch<React.SetStateAction<Hotkey[]>>;
 };
 

@@ -54,11 +54,6 @@ const config = {
             label: 'Documentation',
           },
           //{ to: '/blog', label: 'Blog', position: 'left' },
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
-          },
         ],
       },
       footer: {
@@ -78,11 +73,11 @@ const config = {
             items: [
               {
                 label: 'useHotkeysDocs',
-                to: '/docs/useHotkeysDocs',
+                to: '/docs/api/useHotkeysDocs',
               },
               {
                 label: 'HotkeysDocsContext',
-                to: '/docs/HotkeysDocsContext',
+                to: '/docs/api/HotkeysDocsContext',
               },
             ],
           },

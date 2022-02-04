@@ -1,12 +1,13 @@
 # react-hotkeys-docs-hook
 
-This is a thin wrapper for [react-hotkeys-hook](https://react-hotkeys-hook.vercel.app/) package to allow documenting the hotkeys.
+This is a thin wrapper for [react-hotkeys-hook](https://react-hotkeys-hook.vercel.app/) package to allow dynamically documenting the hotkeys.
+This means that the every hotkey that a component registers is added to a global context, and removed from the context upon the component unmount, to ensure fresh list of hotkeys.
 
 ## Documentation & Live Examples
 
-- [Quick Start](https://react-hotkeys-hook.vercel.app/docs/intro)
-- [Documentation](https://react-hotkeys-hook.vercel.app/docs/documentation/installation)
-- [API](https://react-hotkeys-hook.vercel.app/docs/api/use-hotkeys)
+- [Quick Start](https://react-hotkeys-docs-hook.vercel.app/docs/intro)
+- [Documentation](https://react-hotkeys-docs-hook.vercel.app/docs/)
+- [API](https://react-hotkeys-hotkeys-docs.vercel.app/docs/api/use-docs-hotkeys)
 
 ## Installation
 
@@ -27,7 +28,9 @@ Make sure that you have at least version 16.8 of `react` and `react-dom` install
 ```js
 export const ExampleComponent = () => {
   const [count, setCount] = useState(0);
-  useHotkeys('ctrl+k', () => setCount(prevCount => prevCount + 1));
+  useHotkeysDocs('A', 'Cool hotkey', 'b', 'ctrl+k', () =>
+    setCount(prevCount => prevCount + 1)
+  );
 
   return <p>Pressed {count} times.</p>;
 };
@@ -35,6 +38,13 @@ export const ExampleComponent = () => {
 
 ### Call Signature
 
-```typescript
-useHotkeys(keys: string, callback: (event: KeyboardEvent, handler: HotkeysEvent) => void, options: Options = {}, deps: any[] = [])
+```ts
+function useHotkeyDocs<T extends Element>(
+  section: string,
+  description: string,
+  keys: string,
+  callback: (event: KeyboardEvent, handler: HotkeysEvent) => void,
+  options: Options = {},
+  deps: any[] = []
+): React.MutableRef<T | null>;
 ```

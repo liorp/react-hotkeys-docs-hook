@@ -60,7 +60,7 @@ const AnotherInnerSection = () => {
 };
 
 const App = () => {
-  const [hotkeysDocs, setHotkeysDocs] = React.useState<HotkeysDocs>([]);
+  const [hotkeysDocs, setHotkeysDocs] = React.useState < HotkeysDocs > [];
 
   return (
     <HotkeysDocsContext.Provider value={{ hotkeysDocs, setHotkeysDocs }}>
