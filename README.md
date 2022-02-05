@@ -10,8 +10,7 @@ This means that the every hotkey that a component registers is added to a global
 ## Documentation
 
 - [Quick Start](https://react-hotkeys-docs-hook.vercel.app/docs/intro)
-- [Documentation](https://react-hotkeys-docs-hook.vercel.app/docs/)
-- [API](https://react-hotkeys-hotkeys-docs.vercel.app/docs/api/use-docs-hotkeys)
+- [API](https://react-hotkeys-docs-hook.vercel.app/docs/api/useHotkeysDocs)
 
 ## Installation
 
